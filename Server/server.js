@@ -5,6 +5,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/game', gameRoutes);
 //routes
 app.get('/', (req, res) => {
     res.send('Tic Toe App api is running!');
