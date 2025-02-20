@@ -6,7 +6,7 @@ const GameMode = () => {
 
     const selectMode = (mode) => {
         localStorage.setItem('gameMode', mode);
-        navigate('/game');
+        navigate('/Game');
     };
 
     return (

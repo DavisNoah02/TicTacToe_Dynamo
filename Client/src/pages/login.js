@@ -9,7 +9,7 @@ const Login = () => {
         if (username) {
             localStorage.setItem('username', username);
             console.log(localStorage.getItem('username')); 
-            navigate('/mode');
+            navigate('/gameMode');
         }
     };
 

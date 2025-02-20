@@ -2,17 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Login from './pages/login';
-import Gamemode from './pages/gameMode';
+import Gamemodes from './pages/gameMode';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
     <Routes>
       <Route exact path="/" element={<Login/>} />
-      <Route exact path="/gamemode" component={<Gamemode/>} />
-d
+      <Route exact path="/gameMode" component={<Gamemodes/>} />
       <Route path="game" element={<App />} />
     </Routes>
   </Router>

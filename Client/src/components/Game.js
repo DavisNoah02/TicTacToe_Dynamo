@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Board from './Board';
+import { calculateWinner, minimax, HUMAN, COMP } from '../Utils/gameLogic';
+import '../Styles/Game.css';
 
 function Game() {
   const [history, setHistory] = useState([{ squares: Array(9).fill(null) }]);
   const [stepNumber, setStepNumber] = useState(0);
   const [xIsNext, setXIsNext] = useState(true);
+
+  useEffect(() => {
+    if (!xIsNext) {
+      const current = history[stepNumber];
+      const bestMove = minimax(current.squares, 0, true);
+      handleClick(bestMove.index);
+    }
+  }, [xIsNext, history, stepNumber]);
 
   const handleClick = (i) => {
     const historyCopy = history.slice(0, stepNumber + 1);
@@ -15,7 +25,7 @@ function Game() {
       return;
     }
 
-    squares[i] = xIsNext ? 'X' : 'O';
+    squares[i] = xIsNext ? HUMAN : COMP;
     setHistory(historyCopy.concat([{ squares }]));
     setStepNumber(historyCopy.length);
     setXIsNext(!xIsNext);
@@ -42,7 +52,7 @@ function Game() {
   if (winner) {
     status = 'Winner: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Next player: ' + (xIsNext ? HUMAN : COMP);
   }
 
   return (
@@ -56,26 +66,6 @@ function Game() {
       </div>
     </div>
   );
-}
-
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
 }
 
 export default Game;
