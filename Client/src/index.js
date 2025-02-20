@@ -12,7 +12,7 @@ root.render(
     <Routes>
       <Route exact path="/" element={<Login/>} />
       <Route exact path="/gamemode" component={<Gamemode/>} />
-
+d
       <Route path="game" element={<App />} />
     </Routes>
   </Router>
